@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="La campanella">
 <meta property="og:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关命令行工具0.1">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-03T15:35:17.717Z">
+<meta property="og:updated_time" content="2019-09-03T15:52:55.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在国内利用 kubeadm 在 Ubuntu 中安装单 master k8s 集群">
 <meta name="twitter:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关命令行工具0.1">
@@ -235,7 +235,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-03 23:35:17" itemprop="dateModified" datetime="2019-09-03T23:35:17+08:00">2019-09-03</time>
+                <time title="Modified: 2019-09-03 23:52:55" itemprop="dateModified" datetime="2019-09-03T23:52:55+08:00">2019-09-03</time>
               </span>
             
           
@@ -284,7 +284,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o /tmp/kube-flannel.yml https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml</span><br><span class="line">kubectl apply -f /tmp/kube-flannel.yml</span><br></pre></td></tr></table></figure>
 
 <p>注意上述命令只需要在主节点执行。可能会遇到拉取不到镜像的问题，可能需要手动在各个节点拉取镜像，可以使用 <a href="https://github.com/Azure/container-service-for-azure-china/blob/master/aks/README.md#22-container-registry-proxy" target="_blank" rel="noopener">azure 的 k8s 源</a> 快速拉取：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull quay.azk8s.cn/coreos/flannel:v0.11.0-amd64</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull quay.azk8s.cn/coreos/flannel:v0.11.0-amd64</span><br><span class="line">docker tag quay.azk8s.cn/coreos/flannel:v0.11.0-amd64 quay.io/coreos/flannel:v0.11.0-amd64</span><br></pre></td></tr></table></figure>
 
 <p>注意从属节点也需要自己拉取下述的镜像。</p>
 <h2 id="1-3-节点加入"><a href="#1-3-节点加入" class="headerlink" title="1.3 节点加入"></a>1.3 节点加入</h2><p>在 <code>kubeadm init</code>成功后，命令行会显示 Join 命令，命令格式如下：</p>
