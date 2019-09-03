@@ -62,7 +62,7 @@
 <meta property="og:site_name" content="La campanella">
 <meta property="og:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关命令行工具0.1">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-31T07:52:31.199Z">
+<meta property="og:updated_time" content="2019-09-03T15:35:17.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在国内利用 kubeadm 在 Ubuntu 中安装单 master k8s 集群">
 <meta name="twitter:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关命令行工具0.1">
@@ -224,11 +224,19 @@
                 
               
 
-              <time title="Created: 2019-08-31 15:26:29 / Modified: 15:52:31" itemprop="dateCreated datePublished" datetime="2019-08-31T15:26:29+08:00">2019-08-31</time>
+              <time title="Created: 2019-08-31 15:26:29" itemprop="dateCreated datePublished" datetime="2019-08-31T15:26:29+08:00">2019-08-31</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-09-03 23:35:17" itemprop="dateModified" datetime="2019-09-03T23:35:17+08:00">2019-09-03</time>
+              </span>
             
           
 
@@ -254,7 +262,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker.service</span><br></pre></td></tr></table></figure>
 
 <h2 id="0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl"><a href="#0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl" class="headerlink" title="0.2 安装 k8s 相关命令行工具——kubelet, kubeadm, kubectl"></a>0.2 安装 k8s 相关命令行工具——<code>kubelet</code>, <code>kubeadm</code>, <code>kubectl</code></h2><p>在这里我们利用 <a href="http://mirrors.ustc.edu.cn" target="_blank" rel="noopener">中科大 (UTSC)</a> 的 ubuntu k8s 源下载 k8s 相关包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s http://packages.faasx.com/google/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y kubelet kubeadm kubectl</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y kubelet kubeadm kubectl</span><br></pre></td></tr></table></figure>
 
 <h1 id="1-初始化-Kubernetes"><a href="#1-初始化-Kubernetes" class="headerlink" title="1. 初始化 Kubernetes"></a>1. 初始化 Kubernetes</h1><h2 id="1-1-初始化-k8s-master"><a href="#1-1-初始化-k8s-master" class="headerlink" title="1.1 初始化 k8s master"></a>1.1 初始化 k8s master</h2><p>K8s 1.11 支持了 <code>kubeadm</code> 传入配置文件，我们可以新建下述配置文件 <code>kubeadm.conf</code></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterConfiguration</span></span><br><span class="line"><span class="attr">etcd:</span></span><br><span class="line">  <span class="comment"># one of local or external</span></span><br><span class="line"><span class="attr">  local:</span></span><br><span class="line"><span class="attr">    imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br><span class="line"><span class="attr">    imageTag:</span> <span class="string">"3.3.10"</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line"><span class="attr">  serviceSubnet:</span> <span class="string">"10.96.0.0/12"</span></span><br><span class="line"><span class="attr">  podSubnet:</span> <span class="string">"10.244.0.0/16"</span>    <span class="comment"># for flannel</span></span><br><span class="line"><span class="attr">  dnsDomain:</span> <span class="string">"cluster.local"</span></span><br><span class="line"><span class="attr">kubernetesVersion:</span> <span class="string">"v1.15.0"</span></span><br><span class="line"><span class="attr">imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br></pre></td></tr></table></figure>
