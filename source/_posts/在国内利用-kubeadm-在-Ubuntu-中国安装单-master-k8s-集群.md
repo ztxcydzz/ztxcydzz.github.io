@@ -4,7 +4,7 @@ date: 2019-08-31 15:26:29
 tags:
 ---
 
-本文主要参考 Kubernetes 官方文档 [Creating a single control-plane cluster with kubeadm](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。
+本文主要参考 Kubernetes 官方文档 [Creating a single control-plane cluster with kubeadm (v1.16)](https://v1-16.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。
 
 # 0. 安装 docker 和 k8s 相关命令行工具
 
@@ -39,14 +39,18 @@ sudo cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main
 EOF
 
-sudo apt install -y kubelet=1.15.4-00 kubeadm=1.15.4-00 kubectl=1.15.4-00
+sudo apt install -y kubelet=1.16.1-00 kubeadm=1.16.1-00 kubectl=1.16.1-00
 ```
+
+我们这里安装的是目前 K8S 最新的版本 `v1.16.1`
 
 # 1. 初始化 Kubernetes
 
 ## 1.1 初始化 k8s master
 
-K8s 1.11 支持了 `kubeadm` 传入配置文件，我们可以新建下述配置文件 `kubeadm.conf`
+K8s 1.11 支持了 `kubeadm` 传入配置文件，我们可以新建下述配置文件 `kubeadm.conf`，注意我们采用的是 k8s 1.16.1 的相关配置，这个版本支持的 etcd 镜像 tag 为 `3.3.15-0`，如果有必要，`dnsDomain` 可以改成自己需要的，这里我们采用默认的 `cluster.local`
+
+如果你的 k8s 版本不一致，可以采用 `kubeadm config images list` 查看你的 k8s 所需要的 etcd 镜像 tag。
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta1
@@ -55,12 +59,12 @@ etcd:
   # one of local or external
   local:
     imageRepository: "gcr.azk8s.cn/google-containers" # origin is "k8s.gcr.io"
-    imageTag: "3.3.10"
+    imageTag: "3.3.15-0"
 networking:
   serviceSubnet: "10.96.0.0/12"
   podSubnet: "10.244.0.0/16"    # for flannel
   dnsDomain: "cluster.local"
-kubernetesVersion: "v1.15.4"
+kubernetesVersion: "v1.16.1"
 imageRepository: "gcr.azk8s.cn/google-containers" # origin is "k8s.gcr.io"
 ```
 
@@ -101,29 +105,22 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
+最后，为了让 master 也可以调度，可以加入下面的命令：
+
+```
+kubectl taint node $(kubectl get nodes -o name) node-role.kubernetes.io/master-
+```
+
 ## 1.2 添加网络配置
 
-上述信息做好了之后，在 master 上加入 `flannel` 插件
-
-```
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
-```
-
-如若慢的话，建议下载该文件再 kubectl apply：
+上述信息做好了之后，在 master 上加入 `flannel` 插件，flannel 插件版本我们目前采用[文档中针对 v1.16 的版本](https://v1-16.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network)，由于国内网络环境缓慢，建议下载该文件更改镜像之后再 kubectl apply：
 
 ```bash
-curl -L -o /tmp/kube-flannel.yml https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml
+curl https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml | sed 's/quay.io/quay.azk8s.cn/g' > /tmp/kube-flannel.yml
 kubectl apply -f /tmp/kube-flannel.yml
 ```
 
-注意上述命令只需要在主节点执行。可能会遇到拉取不到镜像的问题，可能需要手动在各个节点拉取镜像，可以使用 [azure 的 k8s 源](https://github.com/Azure/container-service-for-azure-china/blob/master/aks/README.md#22-container-registry-proxy) 快速拉取：
-
-```bash
-docker pull quay.azk8s.cn/coreos/flannel:v0.11.0-amd64
-docker tag quay.azk8s.cn/coreos/flannel:v0.11.0-amd64 quay.io/coreos/flannel:v0.11.0-amd64
-```
-
-注意从属节点也需要自己拉取下述的镜像。
+注意上述命令只需要在主节点执行。
 
 ## 1.3 节点加入
 
