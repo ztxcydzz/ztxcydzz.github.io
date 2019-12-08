@@ -1,34 +1,30 @@
 <!DOCTYPE html>
-
-
-
-
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
-  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    hostname: new URL('http://weixiaohuang.com').hostname,
     root: '/',
     scheme: 'Pisces',
-    version: '7.3.0',
+    version: '7.6.0',
     exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
     copycode: {"enable":false,"show_result":false,"style":null},
     back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
     bookmark: {"enable":false,"color":"#222","save":"auto"},
@@ -36,6 +32,7 @@
     mediumzoom: false,
     lazyload: false,
     pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
     algolia: {
       appID: '',
       apiKey: '',
@@ -45,13 +42,7 @@
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
-    },
-    sidebarPadding: 40
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
   };
 </script>
 
@@ -62,7 +53,8 @@
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="La campanella">
-  <link rel="canonical" href="http://weixiaohuang.com/">
+
+<link rel="canonical" href="http://weixiaohuang.com/">
 
 
 <script id="page-configurations">
@@ -70,17 +62,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome: true,
-    isPost: false,
-    isPage: false,
-    isArchive: false
+    isPost: false
   };
 </script>
 
   <title>La campanella</title>
-  <meta name="generator" content="Hexo 3.9.0">
   
-
-
 
 
 
@@ -99,7 +86,6 @@
   .use-motion .post-body,
   .use-motion .collection-header { opacity: initial; }
 
-  .use-motion .logo,
   .use-motion .site-title,
   .use-motion .site-subtitle {
     opacity: initial;
@@ -113,11 +99,11 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-meta">
 
@@ -131,11 +117,11 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
 </div>
 
@@ -143,26 +129,14 @@
 <nav class="site-nav">
   
   <ul id="menu" class="menu">
-      
-      
-      
-        
         <li class="menu-item menu-item-home">
-      
-    
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
 
   </li>
-      
-      
-      
-        
         <li class="menu-item menu-item-archives">
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
   </ul>
@@ -178,25 +152,25 @@
   </div>
 
 
-    <main id="main" class="main">
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+
+          <div class="content">
             
 
-          <div id="content" class="content">
-            
-  <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+  <div class="posts-expand">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://weixiaohuang.com/2019/09/03/初始化一个比较舒适的开发环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Weixiao Huang">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -204,9 +178,8 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/03/初始化一个比较舒适的开发环境/" class="post-title-link" itemprop="url">初始化一个比较舒适的开发环境</a>
           
+            <a href="/2019/09/03/初始化一个比较舒适的开发环境/" class="post-title-link" itemprop="url">初始化一个比较舒适的开发环境</a>
         </h1>
 
         <div class="post-meta">
@@ -215,18 +188,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-
-              
-                
               
 
               <time title="Created: 2019-09-03 23:18:00 / Modified: 23:27:25" itemprop="dateCreated datePublished" datetime="2019-09-03T23:18:00+08:00">2019-09-03</time>
             </span>
-          
-            
-
-            
-          
 
           
 
@@ -257,7 +222,6 @@
 
 <p>即可。</p>
 
-        
       
     </div>
 
@@ -265,27 +229,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://weixiaohuang.com/2019/09/01/用-docker-搭建-ceph-rbd-服务/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Weixiao Huang">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -293,9 +253,8 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/09/01/用-docker-搭建-ceph-rbd-服务/" class="post-title-link" itemprop="url">用 docker 搭建 ceph rbd 服务</a>
           
+            <a href="/2019/09/01/用-docker-搭建-ceph-rbd-服务/" class="post-title-link" itemprop="url">用 docker 搭建 ceph rbd 服务</a>
         </h1>
 
         <div class="post-meta">
@@ -304,18 +263,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-
-              
-                
               
 
               <time title="Created: 2019-09-01 09:32:17 / Modified: 09:57:37" itemprop="dateCreated datePublished" datetime="2019-09-01T09:32:17+08:00">2019-09-01</time>
             </span>
-          
-            
-
-            
-          
 
           
 
@@ -359,7 +310,6 @@
 
 <p>如果能够成功不卡住返回空值，说明 rbd 集群正常，执行 <code>ceph -s</code> 可以看到初始化了 1 个 pool 和 64 个 pgs：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ docker exec -it ceph-mon ceph -s</span><br><span class="line">  cluster:</span><br><span class="line">    id:     e3cdecce-16f7-4c0f-9909-ab94a5e7c1b5</span><br><span class="line">    health: HEALTH_OK</span><br><span class="line"></span><br><span class="line">  services:</span><br><span class="line">    mon: 1 daemons, quorum new</span><br><span class="line">    mgr: new(active)</span><br><span class="line">    osd: 1 osds: 1 up, 1 in</span><br><span class="line"></span><br><span class="line">  data:</span><br><span class="line">    pools:   1 pools, 64 pgs</span><br><span class="line">    objects: 0  objects, 0 B</span><br><span class="line">    usage:   2.9 GiB used, 1020 GiB / 1023 GiB avail</span><br><span class="line">    pgs:     64 active+clean</span><br></pre></td></tr></table></figure>
-        
       
     </div>
 
@@ -367,27 +317,23 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
-        <article itemscope itemtype="http://schema.org/Article">
+        
   
   
-  
-  <div class="post-block home">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://weixiaohuang.com/2019/08/31/在国内利用-kubeadm-在-Ubuntu-中国安装单-master-k8s-集群/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="Weixiao Huang">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -395,9 +341,8 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/08/31/在国内利用-kubeadm-在-Ubuntu-中国安装单-master-k8s-集群/" class="post-title-link" itemprop="url">在国内利用 kubeadm 在 Ubuntu 中安装单 master k8s 集群</a>
           
+            <a href="/2019/08/31/在国内利用-kubeadm-在-Ubuntu-中国安装单-master-k8s-集群/" class="post-title-link" itemprop="url">在国内利用 kubeadm 在 Ubuntu 中安装单 master k8s 集群</a>
         </h1>
 
         <div class="post-meta">
@@ -407,25 +352,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              
-                
-              
-
               <time title="Created: 2019-08-31 15:26:29" itemprop="dateCreated datePublished" datetime="2019-08-31T15:26:29+08:00">2019-08-31</time>
             </span>
-          
-            
-
-            
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-03 23:52:55" itemprop="dateModified" datetime="2019-09-03T23:52:55+08:00">2019-09-03</time>
+                <time title="Modified: 2019-12-08 16:34:57" itemprop="dateModified" datetime="2019-12-08T16:34:57+08:00">2019-12-08</time>
               </span>
-            
-          
 
           
 
@@ -438,7 +373,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本文主要参考 Kubernetes 官方文档 <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" target="_blank" rel="noopener">Creating a single control-plane cluster with kubeadm</a>，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。</p>
+          <p>本文主要参考 Kubernetes 官方文档 <a href="https://v1-16.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" target="_blank" rel="noopener">Creating a single control-plane cluster with kubeadm (v1.16)</a>，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。</p>
 <h1 id="0-安装-docker-和-k8s-相关命令行工具"><a href="#0-安装-docker-和-k8s-相关命令行工具" class="headerlink" title="0. 安装 docker 和 k8s 相关命令行工具"></a>0. 安装 docker 和 k8s 相关命令行工具</h1><h2 id="0-1-安装-docker"><a href="#0-1-安装-docker" class="headerlink" title="0.1 安装 docker"></a>0.1 安装 docker</h2><p>利用 <a href="http://get.daocloud.io/#install-docker" target="_blank" rel="noopener">daocloud</a> 上的 docker 安装方法在国内安装 docker，由于默认会从官方拉，我们可以考虑利用 Aliyun 的镜像</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/docker | sh -s -- --mirror Aliyun</span><br></pre></td></tr></table></figure>
 
@@ -449,10 +384,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker.service</span><br></pre></td></tr></table></figure>
 
 <h2 id="0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl"><a href="#0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl" class="headerlink" title="0.2 安装 k8s 相关命令行工具——kubelet, kubeadm, kubectl"></a>0.2 安装 k8s 相关命令行工具——<code>kubelet</code>, <code>kubeadm</code>, <code>kubectl</code></h2><p>在这里我们利用 <a href="http://mirrors.ustc.edu.cn" target="_blank" rel="noopener">中科大 (UTSC)</a> 的 ubuntu k8s 源下载 k8s 相关包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y kubelet kubeadm kubectl</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo apt install -y kubelet=1.16.1-00 kubeadm=1.16.1-00 kubectl=1.16.1-00</span><br></pre></td></tr></table></figure>
 
-<h1 id="1-初始化-Kubernetes"><a href="#1-初始化-Kubernetes" class="headerlink" title="1. 初始化 Kubernetes"></a>1. 初始化 Kubernetes</h1><h2 id="1-1-初始化-k8s-master"><a href="#1-1-初始化-k8s-master" class="headerlink" title="1.1 初始化 k8s master"></a>1.1 初始化 k8s master</h2><p>K8s 1.11 支持了 <code>kubeadm</code> 传入配置文件，我们可以新建下述配置文件 <code>kubeadm.conf</code></p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterConfiguration</span></span><br><span class="line"><span class="attr">etcd:</span></span><br><span class="line">  <span class="comment"># one of local or external</span></span><br><span class="line"><span class="attr">  local:</span></span><br><span class="line"><span class="attr">    imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br><span class="line"><span class="attr">    imageTag:</span> <span class="string">"3.3.10"</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line"><span class="attr">  serviceSubnet:</span> <span class="string">"10.96.0.0/12"</span></span><br><span class="line"><span class="attr">  podSubnet:</span> <span class="string">"10.244.0.0/16"</span>    <span class="comment"># for flannel</span></span><br><span class="line"><span class="attr">  dnsDomain:</span> <span class="string">"cluster.local"</span></span><br><span class="line"><span class="attr">kubernetesVersion:</span> <span class="string">"v1.15.0"</span></span><br><span class="line"><span class="attr">imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br></pre></td></tr></table></figure>
+<p>我们这里安装的是目前 K8S 最新的版本 <code>v1.16.1</code></p>
+<h1 id="1-初始化-Kubernetes"><a href="#1-初始化-Kubernetes" class="headerlink" title="1. 初始化 Kubernetes"></a>1. 初始化 Kubernetes</h1><h2 id="1-1-初始化-k8s-master"><a href="#1-1-初始化-k8s-master" class="headerlink" title="1.1 初始化 k8s master"></a>1.1 初始化 k8s master</h2><p>K8s 1.11 支持了 <code>kubeadm</code> 传入配置文件，我们可以新建下述配置文件 <code>kubeadm.conf</code>，注意我们采用的是 k8s 1.16.1 的相关配置，这个版本支持的 etcd 镜像 tag 为 <code>3.3.15-0</code>，如果有必要，<code>dnsDomain</code> 可以改成自己需要的，这里我们采用默认的 <code>cluster.local</code></p>
+<p>如果你的 k8s 版本不一致，可以采用 <code>kubeadm config images list</code> 查看你的 k8s 所需要的 etcd 镜像 tag。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterConfiguration</span></span><br><span class="line"><span class="attr">etcd:</span></span><br><span class="line">  <span class="comment"># one of local or external</span></span><br><span class="line"><span class="attr">  local:</span></span><br><span class="line"><span class="attr">    imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br><span class="line"><span class="attr">    imageTag:</span> <span class="string">"3.3.15-0"</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line"><span class="attr">  serviceSubnet:</span> <span class="string">"10.96.0.0/12"</span></span><br><span class="line"><span class="attr">  podSubnet:</span> <span class="string">"10.244.0.0/16"</span>    <span class="comment"># for flannel</span></span><br><span class="line"><span class="attr">  dnsDomain:</span> <span class="string">"cluster.local"</span></span><br><span class="line"><span class="attr">kubernetesVersion:</span> <span class="string">"v1.16.1"</span></span><br><span class="line"><span class="attr">imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br></pre></td></tr></table></figure>
 
 <p>这里我们依然用到了 <a href="https://github.com/Azure/container-service-for-azure-china/blob/master/aks/README.md#22-container-registry-proxy" target="_blank" rel="noopener">azure 的 k8s 源</a>，巨硬可以说是很良心了。上面的 <code>kubernetesVersion</code> 写明自己的 kubeadm 版本，不然会去 google 官方请求版本，可能会卡住。然后运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --config kubeadm.conf</span><br></pre></td></tr></table></figure>
@@ -464,16 +401,13 @@
 <p>执行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-2-添加网络配置"><a href="#1-2-添加网络配置" class="headerlink" title="1.2 添加网络配置"></a>1.2 添加网络配置</h2><p>上述信息做好了之后，在 master 上加入 <code>flannel</code> 插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<p>最后，为了让 master 也可以调度，可以加入下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint node $(kubectl get nodes -o name) node-role.kubernetes.io/master-</span><br></pre></td></tr></table></figure>
 
-<p>如若慢的话，建议下载该文件再 kubectl apply：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L -o /tmp/kube-flannel.yml https://raw.githubusercontent.com/coreos/flannel/62e44c867a2846fefb68bd5f178daf4da3095ccb/Documentation/kube-flannel.yml</span><br><span class="line">kubectl apply -f /tmp/kube-flannel.yml</span><br></pre></td></tr></table></figure>
+<h2 id="1-2-添加网络配置"><a href="#1-2-添加网络配置" class="headerlink" title="1.2 添加网络配置"></a>1.2 添加网络配置</h2><p>上述信息做好了之后，在 master 上加入 <code>flannel</code> 插件，flannel 插件版本我们目前采用<a href="https://v1-16.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network" target="_blank" rel="noopener">文档中针对 v1.16 的版本</a>，由于国内网络环境缓慢，建议下载该文件更改镜像之后再 kubectl apply：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml | sed <span class="string">'s/quay.io/quay.azk8s.cn/g'</span> &gt; /tmp/kube-flannel.yml</span><br><span class="line">kubectl apply -f /tmp/kube-flannel.yml</span><br></pre></td></tr></table></figure>
 
-<p>注意上述命令只需要在主节点执行。可能会遇到拉取不到镜像的问题，可能需要手动在各个节点拉取镜像，可以使用 <a href="https://github.com/Azure/container-service-for-azure-china/blob/master/aks/README.md#22-container-registry-proxy" target="_blank" rel="noopener">azure 的 k8s 源</a> 快速拉取：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull quay.azk8s.cn/coreos/flannel:v0.11.0-amd64</span><br><span class="line">docker tag quay.azk8s.cn/coreos/flannel:v0.11.0-amd64 quay.io/coreos/flannel:v0.11.0-amd64</span><br></pre></td></tr></table></figure>
-
-<p>注意从属节点也需要自己拉取下述的镜像。</p>
+<p>注意上述命令只需要在主节点执行。</p>
 <h2 id="1-3-节点加入"><a href="#1-3-节点加入" class="headerlink" title="1.3 节点加入"></a>1.3 节点加入</h2><p>在 <code>kubeadm init</code>成功后，命令行会显示 Join 命令，命令格式如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join --token &lt;token&gt; &lt;master-ip&gt;:&lt;master-port&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</span><br></pre></td></tr></table></figure>
 
@@ -484,7 +418,6 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2&gt;/dev/null | openssl dgst -sha256 -hex | sed &apos;s/^.* //&apos;</span><br></pre></td></tr></table></figure>
 
 
-        
       
     </div>
 
@@ -492,33 +425,51 @@
     
     
       <footer class="post-footer">
-          <div class="post-eof"></div>
-        
+        <div class="post-eof"></div>
       </footer>
-  </div>
-  
-  
-  
   </article>
+  
+  
+  
 
-    
   </div>
 
   
+
 
 
           </div>
           
 
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
         </div>
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
   <aside class="sidebar">
@@ -543,17 +494,17 @@
   <p class="site-author-name" itemprop="name">Weixiao Huang</p>
   <div class="site-description" itemprop="description"></div>
 </div>
-  <nav class="site-state motion-element">
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        
           <a href="/archives/">
         
           <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
-    
   </nav>
+</div>
 
 
 
@@ -567,17 +518,24 @@
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love" id="animate">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Weixiao Huang</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+  <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
+  </div>
 
         
 
@@ -588,50 +546,35 @@
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
-
-
-  <script src="/lib/anime.min.js?v=3.1.0"></script>
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
-<script src="/js/schemes/pisces.js?v=7.3.0"></script>
-<script src="/js/next-boot.js?v=7.3.0"></script>
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
 
 
 
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
 
