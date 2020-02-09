@@ -53,7 +53,7 @@
 <meta property="og:site_name" content="La campanella">
 <meta property="og:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm (v1.16)，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-08T08:34:57.848Z">
+<meta property="og:updated_time" content="2020-02-09T02:56:11.406Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在国内利用 kubeadm 在 Ubuntu 中安装单 master k8s 集群">
 <meta name="twitter:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm (v1.16)，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关">
@@ -199,7 +199,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-08 16:34:57" itemprop="dateModified" datetime="2019-12-08T16:34:57+08:00">2019-12-08</time>
+                <time title="Modified: 2020-02-09 10:56:11" itemprop="dateModified" datetime="2020-02-09T10:56:11+08:00">2020-02-09</time>
               </span>
 
           
@@ -224,7 +224,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker.service</span><br></pre></td></tr></table></figure>
 
 <h2 id="0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl"><a href="#0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl" class="headerlink" title="0.2 安装 k8s 相关命令行工具——kubelet, kubeadm, kubectl"></a>0.2 安装 k8s 相关命令行工具——<code>kubelet</code>, <code>kubeadm</code>, <code>kubectl</code></h2><p>在这里我们利用 <a href="http://mirrors.ustc.edu.cn" target="_blank" rel="noopener">中科大 (UTSC)</a> 的 ubuntu k8s 源下载 k8s 相关包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo cat &lt;&lt;EOF &gt;/etc/apt/sources.list.d/kubernetes.list</span><br><span class="line">deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">sudo apt install -y kubelet=1.16.1-00 kubeadm=1.16.1-00 kubectl=1.16.1-00</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo tee -a /etc/apt/sources.list.d/kubernetes.list &gt; /dev/null &lt;&lt;EOT</span><br><span class="line">deb http://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOT</span><br><span class="line"></span><br><span class="line">sudo apt install -y kubelet=1.16.1-00 kubeadm=1.16.1-00 kubectl=1.16.1-00</span><br></pre></td></tr></table></figure>
 
 <p>我们这里安装的是目前 K8S 最新的版本 <code>v1.16.1</code></p>
 <h1 id="1-初始化-Kubernetes"><a href="#1-初始化-Kubernetes" class="headerlink" title="1. 初始化 Kubernetes"></a>1. 初始化 Kubernetes</h1><h2 id="1-1-初始化-k8s-master"><a href="#1-1-初始化-k8s-master" class="headerlink" title="1.1 初始化 k8s master"></a>1.1 初始化 k8s master</h2><p>K8s 1.11 支持了 <code>kubeadm</code> 传入配置文件，我们可以新建下述配置文件 <code>kubeadm.conf</code>，注意我们采用的是 k8s 1.16.1 的相关配置，这个版本支持的 etcd 镜像 tag 为 <code>3.3.15-0</code>，如果有必要，<code>dnsDomain</code> 可以改成自己需要的，这里我们采用默认的 <code>cluster.local</code></p>
@@ -375,7 +375,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
