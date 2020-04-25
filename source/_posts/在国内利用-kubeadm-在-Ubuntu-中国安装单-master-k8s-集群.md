@@ -16,10 +16,10 @@ tags:
 curl -sSL https://get.daocloud.io/docker | sh -s -- --mirror Aliyun
 ```
 
-然后配置 docker 加速器，这里我们选择 [azure 的源](http://mirror.azk8s.cn/help/docker-registry-proxy-cache.html)，非常良心
+然后配置 docker 加速器，这里我们选择网易的 docker 源，如果有其他国内源，你也可以自行更改
 
 ```
-curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s https://dockerhub.azk8s.cn/
+curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s http://hub-mirror.c.163.com
 ```
 
 根据提示重启 docker
@@ -30,19 +30,19 @@ sudo systemctl restart docker.service
 
 ## 0.2 安装 k8s 相关命令行工具——`kubelet`, `kubeadm`, `kubectl`
 
-在这里我们利用 [中科大 (UTSC)](http://mirrors.ustc.edu.cn) 的 ubuntu k8s 源下载 k8s 相关包
+在这里我们利用阿里云的 ubuntu k8s 源下载 k8s 相关包
 
 ```
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
 curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
-sudo cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
-deb http://mirrors.ustc.edu.cn/kubernetes/apt/ kubernetes-xenial main
-EOF
+sudo tee -a /etc/apt/sources.list.d/kubernetes.list > /dev/null <<EOT
+deb http://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+EOT
 
-sudo apt install -y kubelet=1.16.1-00 kubeadm=1.16.1-00 kubectl=1.16.1-00
+sudo apt install -y kubelet=1.16.2-00 kubeadm=1.16.2-00 kubectl=1.16.2-00
 ```
 
-我们这里安装的是目前 K8S 最新的版本 `v1.16.1`
+我们这里安装的是目前 K8S 最新的版本 `v1.16.2`
 
 # 1. 初始化 Kubernetes
 
@@ -58,17 +58,17 @@ kind: ClusterConfiguration
 etcd:
   # one of local or external
   local:
-    imageRepository: "gcr.azk8s.cn/google-containers" # origin is "k8s.gcr.io"
+    imageRepository: "registry.aliyuncs.com/google_containers" # origin is "k8s.gcr.io"
     imageTag: "3.3.15-0"
 networking:
   serviceSubnet: "10.96.0.0/12"
   podSubnet: "10.244.0.0/16"    # for flannel
   dnsDomain: "cluster.local"
-kubernetesVersion: "v1.16.1"
-imageRepository: "gcr.azk8s.cn/google-containers" # origin is "k8s.gcr.io"
+kubernetesVersion: "v1.16.2"
+imageRepository: "registry.aliyuncs.com/google_containers" # origin is "k8s.gcr.io"
 ```
 
-这里我们依然用到了 [azure 的 k8s 源](https://github.com/Azure/container-service-for-azure-china/blob/master/aks/README.md#22-container-registry-proxy)，巨硬可以说是很良心了。上面的 `kubernetesVersion` 写明自己的 kubeadm 版本，不然会去 google 官方请求版本，可能会卡住。然后运行
+这里我们用到了阿里云的 k8s 镜像源。上面的 `kubernetesVersion` 写明自己的 kubeadm 版本，不然会去 google 官方请求版本，可能会卡住。然后运行
 
 ```bash
 kubeadm init --config kubeadm.conf
