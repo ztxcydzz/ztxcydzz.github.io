@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -49,16 +49,16 @@
   <meta name="description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm (v1.16)，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在国内利用 kubeadm 在 Ubuntu 中安装单 master k8s 集群">
-<meta property="og:url" content="http://weixiaohuang.com/2019/08/31/在国内利用-kubeadm-在-Ubuntu-中国安装单-master-k8s-集群/index.html">
+<meta property="og:url" content="http://weixiaohuang.com/2019/08/31/%E5%9C%A8%E5%9B%BD%E5%86%85%E5%88%A9%E7%94%A8-kubeadm-%E5%9C%A8-Ubuntu-%E4%B8%AD%E5%9B%BD%E5%AE%89%E8%A3%85%E5%8D%95-master-k8s-%E9%9B%86%E7%BE%A4/index.html">
 <meta property="og:site_name" content="La campanella">
 <meta property="og:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm (v1.16)，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-09T02:56:11.406Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-08-31T07:26:29.000Z">
+<meta property="article:modified_time" content="2020-04-25T14:17:07.308Z">
+<meta property="article:author" content="Weixiao Huang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在国内利用 kubeadm 在 Ubuntu 中安装单 master k8s 集群">
-<meta name="twitter:description" content="本文主要参考 Kubernetes 官方文档 Creating a single control-plane cluster with kubeadm (v1.16)，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。 0. 安装 docker 和 k8s 相关">
 
-<link rel="canonical" href="http://weixiaohuang.com/2019/08/31/在国内利用-kubeadm-在-Ubuntu-中国安装单-master-k8s-集群/">
+<link rel="canonical" href="http://weixiaohuang.com/2019/08/31/%E5%9C%A8%E5%9B%BD%E5%86%85%E5%88%A9%E7%94%A8-kubeadm-%E5%9C%A8-Ubuntu-%E4%B8%AD%E5%9B%BD%E5%AE%89%E8%A3%85%E5%8D%95-master-k8s-%E9%9B%86%E7%BE%A4/">
 
 
 <script id="page-configurations">
@@ -169,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://weixiaohuang.com/2019/08/31/在国内利用-kubeadm-在-Ubuntu-中国安装单-master-k8s-集群/">
+    <link itemprop="mainEntityOfPage" href="http://weixiaohuang.com/2019/08/31/%E5%9C%A8%E5%9B%BD%E5%86%85%E5%88%A9%E7%94%A8-kubeadm-%E5%9C%A8-Ubuntu-%E4%B8%AD%E5%9B%BD%E5%AE%89%E8%A3%85%E5%8D%95-master-k8s-%E9%9B%86%E7%BE%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -199,7 +199,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-09 10:56:11" itemprop="dateModified" datetime="2020-02-09T10:56:11+08:00">2020-02-09</time>
+                <time title="Modified: 2020-04-25 22:17:07" itemprop="dateModified" datetime="2020-04-25T22:17:07+08:00">2020-04-25</time>
               </span>
 
           
@@ -215,34 +215,34 @@
       
         <p>本文主要参考 Kubernetes 官方文档 <a href="https://v1-16.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/" target="_blank" rel="noopener">Creating a single control-plane cluster with kubeadm (v1.16)</a>，但由于国内实在是访问 Google 困难，之前的教程都是从国内各种镜像中拉取 k8s 镜像，再 tag 成官方的，实在是不太优雅。好在 K8S 新版支持了指定镜像源，可以方便的指定国内源。</p>
 <h1 id="0-安装-docker-和-k8s-相关命令行工具"><a href="#0-安装-docker-和-k8s-相关命令行工具" class="headerlink" title="0. 安装 docker 和 k8s 相关命令行工具"></a>0. 安装 docker 和 k8s 相关命令行工具</h1><h2 id="0-1-安装-docker"><a href="#0-1-安装-docker" class="headerlink" title="0.1 安装 docker"></a>0.1 安装 docker</h2><p>利用 <a href="http://get.daocloud.io/#install-docker" target="_blank" rel="noopener">daocloud</a> 上的 docker 安装方法在国内安装 docker，由于默认会从官方拉，我们可以考虑利用 Aliyun 的镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/docker | sh -s -- --mirror Aliyun</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker | sh -s -- --mirror Aliyun</span><br></pre></td></tr></table></figure>
 
-<p>然后配置 docker 加速器，这里我们选择 <a href="http://mirror.azk8s.cn/help/docker-registry-proxy-cache.html" target="_blank" rel="noopener">azure 的源</a>，非常良心</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://get.daocloud.io/daotools/set_mirror.sh | sh -s https://dockerhub.azk8s.cn/</span><br></pre></td></tr></table></figure>
+<p>然后配置 docker 加速器，这里我们选择网易的 docker 源，如果有其他国内源，你也可以自行更改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https:&#x2F;&#x2F;get.daocloud.io&#x2F;daotools&#x2F;set_mirror.sh | sh -s http:&#x2F;&#x2F;hub-mirror.c.163.com</span><br></pre></td></tr></table></figure>
 
 <p>根据提示重启 docker</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker.service</span><br></pre></td></tr></table></figure>
 
-<h2 id="0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl"><a href="#0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl" class="headerlink" title="0.2 安装 k8s 相关命令行工具——kubelet, kubeadm, kubectl"></a>0.2 安装 k8s 相关命令行工具——<code>kubelet</code>, <code>kubeadm</code>, <code>kubectl</code></h2><p>在这里我们利用 <a href="http://mirrors.ustc.edu.cn" target="_blank" rel="noopener">中科大 (UTSC)</a> 的 ubuntu k8s 源下载 k8s 相关包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo tee -a /etc/apt/sources.list.d/kubernetes.list &gt; /dev/null &lt;&lt;EOT</span><br><span class="line">deb http://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main</span><br><span class="line">EOT</span><br><span class="line"></span><br><span class="line">sudo apt install -y kubelet=1.16.1-00 kubeadm=1.16.1-00 kubectl=1.16.1-00</span><br></pre></td></tr></table></figure>
+<h2 id="0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl"><a href="#0-2-安装-k8s-相关命令行工具——kubelet-kubeadm-kubectl" class="headerlink" title="0.2 安装 k8s 相关命令行工具——kubelet, kubeadm, kubectl"></a>0.2 安装 k8s 相关命令行工具——<code>kubelet</code>, <code>kubeadm</code>, <code>kubectl</code></h2><p>在这里我们利用阿里云的 ubuntu k8s 源下载 k8s 相关包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y apt-transport-https curl</span><br><span class="line">curl -s https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;apt&#x2F;doc&#x2F;apt-key.gpg | sudo apt-key add -</span><br><span class="line">sudo tee -a &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;kubernetes.list &gt; &#x2F;dev&#x2F;null &lt;&lt;EOT</span><br><span class="line">deb http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;kubernetes&#x2F;apt&#x2F; kubernetes-xenial main</span><br><span class="line">EOT</span><br><span class="line"></span><br><span class="line">sudo apt install -y kubelet&#x3D;1.16.2-00 kubeadm&#x3D;1.16.2-00 kubectl&#x3D;1.16.2-00</span><br></pre></td></tr></table></figure>
 
-<p>我们这里安装的是目前 K8S 最新的版本 <code>v1.16.1</code></p>
+<p>我们这里安装的是目前 K8S 最新的版本 <code>v1.16.2</code></p>
 <h1 id="1-初始化-Kubernetes"><a href="#1-初始化-Kubernetes" class="headerlink" title="1. 初始化 Kubernetes"></a>1. 初始化 Kubernetes</h1><h2 id="1-1-初始化-k8s-master"><a href="#1-1-初始化-k8s-master" class="headerlink" title="1.1 初始化 k8s master"></a>1.1 初始化 k8s master</h2><p>K8s 1.11 支持了 <code>kubeadm</code> 传入配置文件，我们可以新建下述配置文件 <code>kubeadm.conf</code>，注意我们采用的是 k8s 1.16.1 的相关配置，这个版本支持的 etcd 镜像 tag 为 <code>3.3.15-0</code>，如果有必要，<code>dnsDomain</code> 可以改成自己需要的，这里我们采用默认的 <code>cluster.local</code></p>
 <p>如果你的 k8s 版本不一致，可以采用 <code>kubeadm config images list</code> 查看你的 k8s 所需要的 etcd 镜像 tag。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterConfiguration</span></span><br><span class="line"><span class="attr">etcd:</span></span><br><span class="line">  <span class="comment"># one of local or external</span></span><br><span class="line"><span class="attr">  local:</span></span><br><span class="line"><span class="attr">    imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br><span class="line"><span class="attr">    imageTag:</span> <span class="string">"3.3.15-0"</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line"><span class="attr">  serviceSubnet:</span> <span class="string">"10.96.0.0/12"</span></span><br><span class="line"><span class="attr">  podSubnet:</span> <span class="string">"10.244.0.0/16"</span>    <span class="comment"># for flannel</span></span><br><span class="line"><span class="attr">  dnsDomain:</span> <span class="string">"cluster.local"</span></span><br><span class="line"><span class="attr">kubernetesVersion:</span> <span class="string">"v1.16.1"</span></span><br><span class="line"><span class="attr">imageRepository:</span> <span class="string">"gcr.azk8s.cn/google-containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">kubeadm.k8s.io/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ClusterConfiguration</span></span><br><span class="line"><span class="attr">etcd:</span></span><br><span class="line">  <span class="comment"># one of local or external</span></span><br><span class="line">  <span class="attr">local:</span></span><br><span class="line">    <span class="attr">imageRepository:</span> <span class="string">"registry.aliyuncs.com/google_containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br><span class="line">    <span class="attr">imageTag:</span> <span class="string">"3.3.15-0"</span></span><br><span class="line"><span class="attr">networking:</span></span><br><span class="line">  <span class="attr">serviceSubnet:</span> <span class="string">"10.96.0.0/12"</span></span><br><span class="line">  <span class="attr">podSubnet:</span> <span class="string">"10.244.0.0/16"</span>    <span class="comment"># for flannel</span></span><br><span class="line">  <span class="attr">dnsDomain:</span> <span class="string">"cluster.local"</span></span><br><span class="line"><span class="attr">kubernetesVersion:</span> <span class="string">"v1.16.2"</span></span><br><span class="line"><span class="attr">imageRepository:</span> <span class="string">"registry.aliyuncs.com/google_containers"</span> <span class="comment"># origin is "k8s.gcr.io"</span></span><br></pre></td></tr></table></figure>
 
-<p>这里我们依然用到了 <a href="https://github.com/Azure/container-service-for-azure-china/blob/master/aks/README.md#22-container-registry-proxy" target="_blank" rel="noopener">azure 的 k8s 源</a>，巨硬可以说是很良心了。上面的 <code>kubernetesVersion</code> 写明自己的 kubeadm 版本，不然会去 google 官方请求版本，可能会卡住。然后运行</p>
+<p>这里我们用到了阿里云的 k8s 镜像源。上面的 <code>kubernetesVersion</code> 写明自己的 kubeadm 版本，不然会去 google 官方请求版本，可能会卡住。然后运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm init --config kubeadm.conf</span><br></pre></td></tr></table></figure>
 
 <p>即可初始化集群。</p>
 <p>完成之后，初始化成功，会输出类似于下面的信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Your Kubernetes master has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p $HOME/.kube</span><br><span class="line">  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">  sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:</span><br><span class="line">  https://kubernetes.io/docs/concepts/cluster-administration/addons/</span><br><span class="line"></span><br><span class="line">You can now join any number of machines by running the following on each node</span><br><span class="line">as root:</span><br><span class="line"></span><br><span class="line">  kubeadm join 172.17.49.197:6443 --token zq59ch.wrr80vejg49091mw --discovery-token-ca-cert-hash sha256:197810ac44d29e4f311a639b22f1dac7dced81604c489be390a1fa5cf0b96f8d</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Your Kubernetes master has initialized successfully!</span><br><span class="line"></span><br><span class="line">To start using your cluster, you need to run the following as a regular user:</span><br><span class="line"></span><br><span class="line">  mkdir -p $HOME&#x2F;.kube</span><br><span class="line">  sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">  sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br><span class="line"></span><br><span class="line">You should now deploy a pod network to the cluster.</span><br><span class="line">Run &quot;kubectl apply -f [podnetwork].yaml&quot; with one of the options listed at:</span><br><span class="line">  https:&#x2F;&#x2F;kubernetes.io&#x2F;docs&#x2F;concepts&#x2F;cluster-administration&#x2F;addons&#x2F;</span><br><span class="line"></span><br><span class="line">You can now join any number of machines by running the following on each node</span><br><span class="line">as root:</span><br><span class="line"></span><br><span class="line">  kubeadm join 172.17.49.197:6443 --token zq59ch.wrr80vejg49091mw --discovery-token-ca-cert-hash sha256:197810ac44d29e4f311a639b22f1dac7dced81604c489be390a1fa5cf0b96f8d</span><br></pre></td></tr></table></figure>
 
 <p>执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME/.kube</span><br><span class="line">sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME/.kube/config</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $HOME&#x2F;.kube</span><br><span class="line">sudo cp -i &#x2F;etc&#x2F;kubernetes&#x2F;admin.conf $HOME&#x2F;.kube&#x2F;config</span><br><span class="line">sudo chown $(id -u):$(id -g) $HOME&#x2F;.kube&#x2F;config</span><br></pre></td></tr></table></figure>
 
 <p>最后，为了让 master 也可以调度，可以加入下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint node $(kubectl get nodes -o name) node-role.kubernetes.io/master-</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl taint node $(kubectl get nodes -o name) node-role.kubernetes.io&#x2F;master-</span><br></pre></td></tr></table></figure>
 
 <h2 id="1-2-添加网络配置"><a href="#1-2-添加网络配置" class="headerlink" title="1.2 添加网络配置"></a>1.2 添加网络配置</h2><p>上述信息做好了之后，在 master 上加入 <code>flannel</code> 插件，flannel 插件版本我们目前采用<a href="https://v1-16.docs.kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network" target="_blank" rel="noopener">文档中针对 v1.16 的版本</a>，由于国内网络环境缓慢，建议下载该文件更改镜像之后再 kubectl apply：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml | sed <span class="string">'s/quay.io/quay.azk8s.cn/g'</span> &gt; /tmp/kube-flannel.yml</span><br><span class="line">kubectl apply -f /tmp/kube-flannel.yml</span><br></pre></td></tr></table></figure>
@@ -255,7 +255,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubeadm token list</span><br></pre></td></tr></table></figure>
 
 <p>然后可以用下述命令获得 <code>&lt;hash&gt;</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2&gt;/dev/null | openssl dgst -sha256 -hex | sed &apos;s/^.* //&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -pubkey -in &#x2F;etc&#x2F;kubernetes&#x2F;pki&#x2F;ca.crt | openssl rsa -pubin -outform der 2&gt;&#x2F;dev&#x2F;null | openssl dgst -sha256 -hex | sed &#39;s&#x2F;^.* &#x2F;&#x2F;&#39;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -273,7 +273,7 @@
     <div class="post-nav">
       <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2019/09/01/用-docker-搭建-ceph-rbd-服务/" rel="next" title="用 docker 搭建 ceph rbd 服务">
+    <a href="/2019/09/01/%E7%94%A8-docker-%E6%90%AD%E5%BB%BA-ceph-rbd-%E6%9C%8D%E5%8A%A1/" rel="next" title="用 docker 搭建 ceph rbd 服务">
       用 docker 搭建 ceph rbd 服务 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -381,7 +381,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Weixiao Huang</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
   <div class="theme-info">Theme – <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.6.0
@@ -404,9 +404,17 @@
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/pisces.js"></script>
+
+
 <script src="/js/next-boot.js"></script>
+
 
 
 
