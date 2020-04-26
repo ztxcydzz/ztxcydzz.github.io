@@ -85,3 +85,4 @@ go modules 有自己一套依赖管理，但是 Bazel 的依赖，很多时候�
 
 另外，k8s 有使用 Bazel 来构建 go projects，他们也采用的是 go modules 和 Bazel 同时支持的方案来实现。这样对于开发者也非常友好，同时对于大项目的管理、构建和测试也非常的友好。
 
+由此，我书写了一个 [bazel-go-scaffold](https://github.com/weixiao-huang/bazel-go-scaffold.git)，基于 [repo-infra](https://github.com/kubernetes/repo-infra.git) 扩展了一个基于 Bazel 的 go 大项目模板，供大家参考
