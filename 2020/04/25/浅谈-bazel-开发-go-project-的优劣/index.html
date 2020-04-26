@@ -54,7 +54,7 @@
 <meta property="og:description" content="Bazel 是 Google 开发的一款跨平台编译工具，是内部 blaze 的开源版本。本文不探讨 bazel 的使用，如果想了解如何用 Bazel 构建 go project，可以参考 这篇文章。本文主要探讨 Bazel 开发 go project 和纯使用 go modules 开发会有哪些优劣比较，我们如何去同时利用二者的优劣。 1. Bazel 开发的优势1.1. 多语言支持利用 Baze">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-25T14:22:11.000Z">
-<meta property="article:modified_time" content="2020-04-25T15:01:10.605Z">
+<meta property="article:modified_time" content="2020-04-26T14:15:43.865Z">
 <meta property="article:author" content="Weixiao Huang">
 <meta name="twitter:card" content="summary">
 
@@ -191,10 +191,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-04-25 22:22:11 / Modified: 23:01:10" itemprop="dateCreated datePublished" datetime="2020-04-25T22:22:11+08:00">2020-04-25</time>
+              <time title="Created: 2020-04-25 22:22:11" itemprop="dateCreated datePublished" datetime="2020-04-25T22:22:11+08:00">2020-04-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-26 22:15:43" itemprop="dateModified" datetime="2020-04-26T22:15:43+08:00">2020-04-26</time>
+              </span>
 
           
 
@@ -230,6 +236,7 @@
 <p>对于第三个劣势，我们可以书写一些 Bazel 脚本，在 Bazel 的沙箱中使用 go modules 模式来使用 golangci-lint，这个方式在 k8s <a href="https://github.com/kubernetes/repo-infra/blob/v0.0.3/hack/verify-golangci-lint.sh" target="_blank" rel="noopener">repo-infra 的 verify-golangci-lint.sh</a> 中有使用。</p>
 <p>对于第四个劣势，就要求项目维护者提供详尽的文档说明，如何 update 依赖，如何处理 Bazel 的一些问题，如何优化项目结构。当然我认为这并不是太大的问题，因为对于一个大项目来说，规范是必须的。</p>
 <p>另外，k8s 有使用 Bazel 来构建 go projects，他们也采用的是 go modules 和 Bazel 同时支持的方案来实现。这样对于开发者也非常友好，同时对于大项目的管理、构建和测试也非常的友好。</p>
+<p>由此，我书写了一个 <a href="https://github.com/weixiao-huang/bazel-go-scaffold.git" target="_blank" rel="noopener">bazel-go-scaffold</a>，基于 <a href="https://github.com/kubernetes/repo-infra.git" target="_blank" rel="noopener">repo-infra</a> 扩展了一个基于 Bazel 的 go 大项目模板，供大家参考</p>
 
     </div>
 
